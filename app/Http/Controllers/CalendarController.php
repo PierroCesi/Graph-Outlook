@@ -40,6 +40,28 @@ class CalendarController extends Controller
   }
 
 
+  public function getCalendarID()
+  {
+    $viewData = $this->loadViewData();
+
+    // Get the access token from the cache
+    $tokenCache = new TokenCache();
+    $accessToken = $tokenCache->getAccessToken();
+
+    // Create a Graph client
+    $graph = new Graph();
+    $graph->setAccessToken($accessToken);
+
+    // Append query parameters to the '/me/events' url
+    $getEventsUrl = '/me/calendar';
+
+    $events = $graph->createRequest('GET', $getEventsUrl)
+      ->setReturnType(Model\Event::class)
+      ->execute();
+
+      print_r($events);
+      
+  }
 
   public function posts()
   {
@@ -52,6 +74,7 @@ class CalendarController extends Controller
     // Create a Graph client
     $graph = new Graph();
     $graph->setAccessToken($accessToken);
+    $id = 'AQMkADdkNmYxNDkyLTgwZTgtNDhkZS1iOWY4LWFmMzY5ZDBkMWM2ZQBGAAADoDVqpyagXEW74hUu8Hq7PgcAqfdduveac0OsiDWQMaeAnwAAAgEGAAAAqfdduveac0OsiDWQMaeAnwAAAh0SAAAA';
 
     $data = [
         'Subject' => 'Discuss the Calendar REST API',
@@ -61,11 +84,11 @@ class CalendarController extends Controller
         ],
         'Start' => [
             'DateTime' => '2020-07-03T19:00:00',
-            'TimeZone' => 'Pacific Standard Time',
+            'TimeZone' => 'Europe/Paris',
         ],
         'End' => [
             'DateTime' => '2020-07-03T20:00:00',
-            'TimeZone' => 'Pacific Standard Time',
+            'TimeZone' => 'Europe/Paris',
         ],
     ];
 
@@ -77,13 +100,14 @@ class CalendarController extends Controller
         ->setReturnType(Model\Event::class)
         ->execute();
 
-      echo '<pre>';print_r($events);exit;
+      print_r($events);
   }
 
   
-  public function post()
+  public function test()
   {
       echo('lol');
       
   }
 }
+

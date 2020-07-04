@@ -14,5 +14,9 @@
     @csrf
     <input type="submit" value="Test post">
   </form>
+  <form method="get" action="">
+    @csrf
+    <input type="submit" value="get calendar">
+  </form>
 </div>
 @endsection

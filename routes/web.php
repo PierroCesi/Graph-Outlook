@@ -19,6 +19,7 @@ Route::get('/callback', 'AuthController@callback');
 Route::get('/signout', 'AuthController@signout');
 Route::get('/calendar', 'CalendarController@calendar');
 Route::post('/', 'CalendarController@posts');
+//Route::get('/', 'CalendarController@getCalendarID');
 /*Route::get('/test', function(){
     return view('/test');
 });
